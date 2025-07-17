@@ -8,6 +8,9 @@ app.engine('hbs', handlebars.engine({ extname: 'hbs' }));
 app.set('view engine', 'hbs'); 
 app.set('views', 'src/views'); 
 
+app.use(express.static('src/public')); 
+app.use(express.urlencoded()); 
+
 mongoose
     .connect('mongodb://localhost:27017', { dbName: 'jobs_board_app' }) 
     .then(() => console.log('Connected to DB.')) 
