@@ -1,9 +1,10 @@
 const handlebars = require('express-handlebars'); 
+const { HBS } = require('../constants/config');
 
 module.exports = { 
     config: (app) => { 
-        app.engine('hbs', handlebars.engine({ extname: 'hbs' })); 
-        app.set('view engine', 'hbs'); 
-        app.set('views', 'src/views'); 
+        app.engine(HBS.EXT, handlebars.engine({ extname: HBS.EXT })); 
+        app.set('view engine', HBS.EXT); 
+        app.set('views', HBS.VIEWS_DIRECTORY); 
     } 
 }; 
