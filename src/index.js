@@ -8,7 +8,7 @@ const { SERVER } = require('./constants/config');
 // App 
 const app = express(); 
 
-// Consfigurations 
+// Configurations 
 expr.config(app); 
 hbrs.config(app); 
 mngs.config(); 
