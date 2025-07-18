@@ -13,7 +13,7 @@ authController
             const user = await authService.register(registerData); 
             res.redirect('/'); 
         } catch (err) { 
-            res.render('auth/register', { registerData, errors: err }); 
+            res.render('auth/register', { registerData, errors: err.errors }); 
         }
         
     }); 
