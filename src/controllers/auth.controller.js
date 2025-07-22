@@ -12,6 +12,7 @@ authController
 
         try { 
             const authToken = await authService.register(registerData); 
+            res.cookie('user', authToken); 
             res.redirect('/'); 
         } catch (err) { 
             res.render('auth/register', { registerData, errors: errorUtils.normalize(err) }); 
@@ -28,6 +29,7 @@ authController
 
         try { 
             const authToken = await authService.login(loginData); 
+            res.cookie('user', authToken); 
             res.redirect('/'); 
         } catch (err) { 
             res.render('auth/login', { loginData, errors: errorUtils.normalize(err) }); 
