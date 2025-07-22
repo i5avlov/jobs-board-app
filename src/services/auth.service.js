@@ -1,3 +1,4 @@
+const ValidationError = require('../errors/ValidationError');
 const User = require('../models/User'); 
 const bcrypt = require('bcrypt'); 
 
@@ -8,7 +9,7 @@ module.exports = {
         // Error if email is already used  
         const existingUser = await User.findOne({ email: email }); 
         if (existingUser) { 
-            throw new Error(`User with email ${email} exists`); 
+            throw new ValidationError('email', `User with email ${email} exists`); 
         } 
 
         // Creating user 
@@ -23,7 +24,7 @@ module.exports = {
 
         // Passwords are compared last 
         if (password !== repeatPassword) { 
-            throw new Error('Passwords do not match'); 
+            throw new ValidationError('passwords', 'Passwords do not match'); 
         } 
 
         return user.save(); 
@@ -35,13 +36,13 @@ module.exports = {
         // Error if there is no user with provided email 
         const user = await User.findOne({ email: email }); 
         if (!user) { 
-            throw new Error('User does not exist'); 
+            throw new ValidationError('email', 'User does not exist'); 
         } 
 
         // Error if password do not match user password s
         const isPasswordValid = await bcrypt.compare(password, user.password); 
         if (false === isPasswordValid) { 
-            throw new Error('Password incorrect'); 
+            throw new ValidationError('password', 'Password incorrect'); 
         } 
 
         return user; 
