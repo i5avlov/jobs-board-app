@@ -64,7 +64,7 @@ function generateAuthToken(user) {
         email: user.email  
     }; 
 
-    const token = jwt.sign(payload, JWT.SECRET); 
+    const token = jwt.sign(JSON.stringify(payload), JWT.SECRET); 
 
     return token; 
 }
