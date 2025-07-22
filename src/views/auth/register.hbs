@@ -20,6 +20,15 @@
     </div> 
 
     <div class="form-group">
+        <label for="photo" class="form-label">Photo Url</label> 
+        <input name="photo" id="photo" type="text" class="form-control" value="{{registerData.photo}}" /> 
+
+        {{#if errors.photo}}
+        <span class="text-danger small">{{errors.photo.message}}</span> 
+        {{/if}}
+    </div> 
+
+    <div class="form-group">
         <label for="password" class="form-label">Password</label> 
         <input name="password" id="password" type="text" class="form-control" /> 
 
