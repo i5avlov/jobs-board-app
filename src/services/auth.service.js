@@ -1,6 +1,8 @@
+const { JWT } = require('../constants/security');
 const ValidationError = require('../errors/ValidationError');
 const User = require('../models/User'); 
 const bcrypt = require('bcrypt'); 
+const jwt = require('jsonwebtoken'); 
 
 module.exports = {
     register: async (registerData) => { 
@@ -27,7 +29,11 @@ module.exports = {
             throw new ValidationError('passwords', 'Passwords do not match'); 
         } 
 
-        return user.save(); 
+        await user.save(); 
+
+        const authToken = generateAuthToken(user); 
+
+        return authToken; 
     }, 
 
     login: async (loginData) => { 
@@ -45,7 +51,20 @@ module.exports = {
             throw new ValidationError('password', 'Password incorrect'); 
         } 
 
-        return user; 
+        const authToken = generateAuthToken(user); 
+
+        return authToken; 
     }, 
 
 }; 
+
+function generateAuthToken(user) { 
+    const payload = {
+        username: user.username, 
+        email: user.email  
+    }; 
+
+    const token = jwt.sign(payload, JWT.SECRET); 
+
+    return token; 
+}
