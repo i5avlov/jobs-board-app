@@ -12,10 +12,17 @@
             <nav class="navbar navbar-expand main-nav"> 
                 <a class="navbar-brand" href="">Jobs Board</a> 
 
-                <ul class="navbar-nav nav"> 
+                <ul class="navbar-nav nav nav-common"> 
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li> 
+                </ul> 
+
+                <ul class="navbar-nav nav nav-user ms-auto"> 
+                    {{#if user}} 
+                    <li class="nav-item"><a class="nav-link" href="/auth/logout">Logout</a></li> 
+                    {{else}}
                     <li class="nav-item"><a class="nav-link" href="/auth/register">Register</a></li> 
-                    <li class="nav-item"><a class="nav-link" href="/auth/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/auth/login">Login</a></li> 
+                    {{/if}}
                 </ul>
             </nav> 
         </div>

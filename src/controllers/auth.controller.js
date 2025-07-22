@@ -37,4 +37,10 @@ authController
         
     }); 
 
+authController
+    .get('/logout', (req, res) => {
+        res.clearCookie('user'); 
+        res.redirect('/'); 
+    }); 
+
 module.exports = authController; 
