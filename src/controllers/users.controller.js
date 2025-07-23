@@ -12,22 +12,25 @@ usersController
         res.render('users/profile', { userData }); 
     }); 
 
-// usersController
-//     .get('/profile/edit', (req, res) => {
-//         res.render(''); 
-//     }) 
-//     .post('/profile/edit', async (req, res) => { 
-//         const profileData = req.body; 
+usersController
+    .get('/profile/edit', async (req, res) => { 
+        const email = req.user.email; 
+        const userData = await usersService.getProfileForEditByEmail(email).lean(); 
 
-//         try { 
-//             const authToken = await authService.register(profileData); 
-//             res.cookie('user', authToken); 
-//             res.redirect('/'); 
-//         } catch (err) { 
-//             res.render('', { profileData, errors: errorUtils.normalize(err) }); 
-//         }
+        res.render('users/profile/edit', { userData }); 
+    }) 
+    .post('/profile/edit', async (req, res) => { 
+        const email = req.user.email; 
+        const updateData = req.body; 
+
+        try { 
+            await usersService.update(email, updateData); 
+            res.redirect('/users/profile'); 
+        } catch (err) { 
+            res.render('users/profile/edit', { updateData, errors: errorUtils.normalize(err) }); 
+        }
         
-//     }); 
+    }); 
 
 
 
