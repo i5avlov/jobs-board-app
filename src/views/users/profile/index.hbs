@@ -1,8 +1,20 @@
-<h2>Your Profile</h2> 
+<div class="text-center page-body page-body-profile">
+    <h2>Your Profile</h2> 
 
-<div class="image-holder image-holder-profile">
-    <img src="{{userData.photo}}" alt="{{userData.username}}" /> 
-</div> 
+    <div class="image-holder image-holder-profile">
+        <img class="image image-profile" src="{{userData.photo}}" alt="{{userData.username}}" /> 
+    </div> 
 
-<h4 class="h5">{{userData.username}}</h4> 
-<p>{{userData.email}}</p>
+    <div class="profile-text">
+        <h4 class="h5">{{userData.username}}</h4> 
+
+        <p class="profile-entry">
+            <span class="entry-label">Description</span>
+            <span class="entry-value">{{userData.description}}</span> 
+        </p>
+        <p class="profile-entry">
+            <span class="entry-label">Email</span>
+            <span class="entry-value">{{userData.email}}</span> 
+        </p> 
+    </div>
+</div>
