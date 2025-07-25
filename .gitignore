@@ -45,7 +45,7 @@ jspm_packages/
 web_modules/ 
 
 # Sass cache 
-.sass-cache 
+**/.sass-cache/* 
 
 # TypeScript cache
 *.tsbuildinfo
