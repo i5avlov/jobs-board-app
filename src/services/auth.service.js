@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
     register: async (registerData) => { 
-        const { username, email, photo, password, repeatPassword } = registerData; 
+        const { username, email, photo, description, password, repeatPassword } = registerData; 
 
         // Error if email is already used  
         const existingUser = await User.findOne({ email: email }); 
@@ -19,6 +19,7 @@ module.exports = {
             username: username, 
             email: email, 
             photo: photo, 
+            description: description, 
             password: password 
         });  
 

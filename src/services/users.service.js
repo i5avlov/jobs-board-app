@@ -7,16 +7,17 @@ module.exports = {
     }, 
 
     getProfileForEditByEmail: (email) => { 
-        return User.findOne({ email: email }).select('username photo'); 
+        return User.findOne({ email: email }).select('username photo description'); 
 
     }, 
 
     update: (email, updateData) => { 
-        const { username, photo } = updateData; 
+        const { username, photo, description } = updateData; 
 
         return User.findOneAndUpdate({ email: email }, { 
             username: username, 
-            photo: photo 
+            photo: photo, 
+            description: description 
         }); 
 
     }
