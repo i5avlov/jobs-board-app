@@ -25,6 +25,6 @@ module.exports = {
                 res.clearCookie('user'); 
                 res.redirect('/auth/login'); 
             }
-        } 
+        }; 
     }
-}
+}; 
