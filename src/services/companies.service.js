@@ -13,4 +13,7 @@ module.exports = {
 
     }, 
 
+    details: (companyId) => { 
+        return Company.findById(companyId); 
+    }
 }; 

@@ -1,0 +1,18 @@
+<div class="text-center page-body page-body-profile">
+    <h2>Company</h2> 
+
+    <div class="image-holder image-holder-profile">
+        <img class="image image-profile" src="{{companyData.image}}" alt="{{companyData.name}}" /> 
+    </div> 
+
+    <div class="profile-text">
+        <h4 class="h5">{{companyData.name}}</h4> 
+
+        <p class="profile-entry">
+            <span class="entry-label">Description</span>
+            <span class="entry-value">{{companyData.description}}</span> 
+        </p>
+    </div> 
+
+    <a href="/companies/{{companyData._id}}/edit" class="btn btn-outline-success">Edit Company</a> 
+</div>

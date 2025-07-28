@@ -20,4 +20,12 @@ companiesController
         
     }); 
 
+companiesController
+    .get('/:companyId/details', async (req, res) => { 
+        const companyId = req.params.companyId; 
+        const companyData = await companiesService.details(companyId).lean(); 
+
+        res.render('companies/details', { companyData }); 
+    }); 
+
 module.exports = companiesController; 
