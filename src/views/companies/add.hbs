@@ -1,0 +1,34 @@
+<h2>Add Company</h2> 
+
+<form class="form form-company-add" method="POST"> 
+    <div class="form-group">
+        <label for="name" class="form-label">Company Name</label> 
+        <input name="name" id="name" type="text" class="form-control" value="{{companyData.name}}" /> 
+
+        {{#if errors.name}}
+        <span class="text-danger small">{{errors.name.message}}</span> 
+        {{/if}}
+    </div> 
+
+    <div class="form-group">
+        <label for="description" class="form-label">Description</label> 
+        <textarea rows="4" name="description" id="description" type="text" class="form-control">{{companyData.description}}</textarea> 
+
+        {{#if errors.description}}
+        <span class="text-danger small">{{errors.description.message}}</span> 
+        {{/if}}
+    </div> 
+
+    <div class="form-group">
+        <label for="image" class="form-label">Logo Url</label> 
+        <input name="image" id="photo" type="text" class="form-control" value="{{companyData.image}}" /> 
+
+        {{#if errors.image}}
+        <span class="text-danger small">{{errors.image.message}}</span> 
+        {{/if}}
+    </div> 
+
+    <div class="buttons mt-4"> 
+        <button class="btn btn-outline-success">Add Company</button> 
+    </div>
+</form> 
