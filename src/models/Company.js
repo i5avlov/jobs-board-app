@@ -1,18 +1,9 @@
 const { Schema, model, Types } = require('mongoose'); 
 
 const companySchema = new Schema({ 
-    name: { 
-        type: String, 
-        required: [true, ''] 
-    }, 
-    description: { 
-        type: String, 
-        required: [true, ''] 
-    }, 
-    image: { 
-        type: String, 
-        required: [true, ''] 
-    }, 
+    name: String, 
+    description: String, 
+    image: String, 
     createdBy: {
         type: Types.ObjectId, 
         ref: 'User' 

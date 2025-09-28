@@ -1,14 +1,8 @@
 const { Schema, model } = require('mongoose'); 
 
 const adSchema = new Schema({ 
-    title: { 
-        type: String, 
-        required: [true, 'Title is required'] 
-    }, 
-    description: { 
-        type: String, 
-        required: [true, ''] 
-    }, 
+    title: String, 
+    description: String, 
 }); 
 
 const Ad = model('Ad', adSchema); 

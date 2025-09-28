@@ -3,24 +3,11 @@ const bcrypt = require('bcrypt');
 const { PASSWORD } = require('../constants/security');
 
 const userSchema = new Schema({ 
-    username: { 
-        type: String, 
-        required: [true, 'Username is required'] 
-    }, 
-    email: {
-        type: String, 
-        required: [true, 'Email is required']
-    }, 
-    photo: { 
-        type: String 
-    }, 
-    description: { 
-        type: String 
-    }, 
-    password: {
-        type: String, 
-        required: [true, 'Password is required'] 
-    } 
+    username: String, 
+    email: String, 
+    photo: String, 
+    description: String, 
+    password: String, 
 }); 
 
 userSchema.pre('save', async function() { 
