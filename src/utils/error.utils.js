@@ -1,5 +1,6 @@
 const mongoose = require('mongoose'); 
 const ValidationError = require('../errors/ValidationError');
+const { Result } = require('express-validator');
 
 module.exports = { 
     normalize: (error) => { 
@@ -15,6 +16,14 @@ module.exports = {
 
         if (error instanceof ValidationError) { 
             errors[error.path] = { message: error.message }; 
+
+            return errors; 
+        } 
+
+        if (error instanceof Result) { 
+            error.array().forEach(err => {
+                errors[err.path] = { message: err.msg }; 
+            }); 
 
             return errors; 
         }
