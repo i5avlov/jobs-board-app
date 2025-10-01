@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 const { PASSWORD } = require('../constants/security');
 
 const userSchema = new Schema({ 
-    username: String, 
+    firstName: String, 
+    lastName: String, 
     email: String, 
     photo: String, 
     description: String, 
