@@ -3,6 +3,7 @@ const authService = require('../services/auth.service');
 const errorUtils = require('../utils/error.utils'); 
 const registerValidation = require('../validation/register.validation'); 
 const loginValidation = require('../validation/login.validation'); 
+const { JWT } = require('../constants/security');
 
 authController
     .get('/register', (req, res) => {
@@ -22,7 +23,7 @@ authController
             // Generate token if register is successful 
             const authToken = await authService.register(validationErrors, registerData); 
             // Set token in cookie 
-            res.cookie('user', authToken); 
+            res.cookie(JWT.COOKIE_NAME, authToken); 
 
             res.redirect('/'); 
         } catch (err) { 
@@ -49,7 +50,7 @@ authController
             // Generate token if login is successful 
             const authToken = await authService.login(loginData); 
             // Set token in cookie  
-            res.cookie('user', authToken); 
+            res.cookie(JWT.COOKIE_NAME, authToken); 
             
             res.redirect('/'); 
         } catch (err) { 
@@ -60,7 +61,7 @@ authController
 
 authController
     .get('/logout', (req, res) => {
-        res.clearCookie('user'); 
+        res.clearCookie(JWT.COOKIE_NAME); 
         res.redirect('/'); 
     }); 
 
