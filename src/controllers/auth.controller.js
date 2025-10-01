@@ -1,18 +1,28 @@
-const authService = require('../services/auth.service');
-const errorUtils = require('../utils/error.utils');
-
 const authController = require('express').Router(); 
+const authService = require('../services/auth.service');
+const errorUtils = require('../utils/error.utils'); 
+const registerValidation = require('../validation/register.validation'); 
 
 authController
     .get('/register', (req, res) => {
         res.render('auth/register'); 
     }) 
-    .post('/register', async (req, res) => { 
+    .post('/register', registerValidation.runValidations(), async (req, res) => { 
+        // Get validation result 
+        const validationErrors = registerValidation.getValidationResult(req); 
+        // Get register data 
         const registerData = req.body; 
 
         try { 
-            const authToken = await authService.register(registerData); 
+            if (false === validationErrors.isEmpty()) { 
+                throw validationErrors; 
+            } 
+
+            // Generate token if register is successful 
+            const authToken = await authService.register(validationErrors, registerData); 
+            // Set token in cookie 
             res.cookie('user', authToken); 
+
             res.redirect('/'); 
         } catch (err) { 
             res.render('auth/register', { registerData, errors: errorUtils.normalize(err) }); 
