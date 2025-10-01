@@ -1,11 +1,15 @@
 const validator = require('express-validator'); 
+const { ERROR_MESSAGES } = require('../constants/error.messages'); 
+const { PASSWORD } = require('../constants/validation.values');
 
 const runValidations = () => { 
     return [
         validator.body('email')
-            .isEmail(), 
+            .isEmail() 
+            .withMessage(ERROR_MESSAGES.EMAIL.NOT_AN_EMAIL), 
         validator.body('password') 
-            .isLength({ min: 4 })
+            .isLength({ min: PASSWORD.MIN_LENGTH }) 
+            .withMessage(ERROR_MESSAGES.MIN_LENGTH('password', PASSWORD.MIN_LENGTH)) 
     ]; 
 }; 
 

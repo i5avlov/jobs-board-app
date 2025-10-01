@@ -10,9 +10,9 @@ module.exports = {
         }, 
 
         PASSWORD: {
-            NO_LOWERCASE_CHAR, 
-            NO_UPPERCASE_CHAR, 
-            NO_DIGIT
+            NO_LOWERCASE_CHAR: '', 
+            NO_UPPERCASE_CHAR: '', 
+            NO_DIGIT: '' 
         }
     }
 }; 
