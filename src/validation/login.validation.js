@@ -4,10 +4,12 @@ const { PASSWORD } = require('../constants/validation.values');
 
 const runValidations = () => { 
     return [
-        validator.body('email')
+        validator.body('email') 
+            .trim() 
             .isEmail()
             .withMessage(ERROR_MESSAGES.EMAIL.NOT_AN_EMAIL), 
         validator.body('password') 
+            .trim() 
             .isLength({ min: PASSWORD.MIN_LENGTH }) 
             .withMessage(ERROR_MESSAGES.MIN_LENGTH('password', PASSWORD.MIN_LENGTH)) 
     ]; 
