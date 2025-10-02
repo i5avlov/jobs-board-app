@@ -6,7 +6,7 @@ module.exports = {
             SUCCESS: 'Server listening...' 
         }
     }, 
-    HBS: { 
+    TEMPLATE_ENGINE: { 
         EXT: 'hbs', 
         VIEWS_DIRECTORY: 'src/views' 
     }, 
