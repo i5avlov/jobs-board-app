@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
     register: async (registerData) => { 
-        const { username, email, photo, description, password, repeatPassword } = registerData; 
+        const { firstName, lastName, email, photo, description, password, repeatPassword } = registerData; 
 
         // Error if email is already used  
         const existingUser = await User.findOne({ email: email }); 
@@ -14,16 +14,17 @@ module.exports = {
             throw new ValidationError('email', `User with email ${email} exists`); 
         } 
 
-        // Creating user 
+        // Creating user model 
         const user = new User({
-            username: username, 
+            firstName: firstName, 
+            lastName: lastName, 
             email: email, 
             photo: photo, 
             description: description, 
             password: password 
         });  
 
-        // Validating user before saving to catch entered data errors 
+        // Validating user data before saving to catch entered data errors 
         await user.validate();
 
         // Passwords are compared last 
