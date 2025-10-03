@@ -14,8 +14,13 @@ module.exports = {
             throw new ValidationError('email', `User with email ${email} exists`); 
         } 
 
+        // Error if passwords do not match  
+        if (password !== repeatPassword) { 
+            throw new ValidationError('passwords', 'Passwords do not match'); 
+        } 
+
         // Creating user model 
-        const user = new User({
+        const user = await User.create({
             firstName: firstName, 
             lastName: lastName, 
             email: email, 
@@ -23,16 +28,6 @@ module.exports = {
             description: description, 
             password: password 
         });  
-
-        // Validating user data before saving to catch entered data errors 
-        await user.validate();
-
-        // Passwords are compared last 
-        if (password !== repeatPassword) { 
-            throw new ValidationError('passwords', 'Passwords do not match'); 
-        } 
-
-        await user.save(); 
 
         const authToken = generateAuthToken(user); 
 
