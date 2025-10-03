@@ -21,7 +21,7 @@ authController
             } 
 
             // Generate token if register is successful 
-            const authToken = await authService.register(validationErrors, registerData); 
+            const authToken = await authService.register(registerData); 
             // Set token in cookie 
             res.cookie(JWT.COOKIE_NAME, authToken); 
 
