@@ -4,7 +4,7 @@ const { JWT } = require('../constants/security');
 module.exports = { 
     auth: () => { 
         return (req, res, next) => { 
-            const token = req.cookies['user']; 
+            const token = req.cookies[JWT.COOKIE_NAME]; 
 
             // No auth cookie, user is not logged in 
             if (!token) { 
@@ -22,7 +22,7 @@ module.exports = {
                 next(); 
             } catch (e) { 
                 // Token is not valid 
-                res.clearCookie('user'); 
+                res.clearCookie(JWT.COOKIE_NAME); 
                 res.redirect('/auth/login'); 
             }
         }; 
