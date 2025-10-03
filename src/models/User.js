@@ -15,6 +15,10 @@ userSchema.pre('save', async function() {
     this.password = await bcrypt.hash(this.password, PASSWORD.HASH_ROUNDS); 
 }); 
 
+userSchema.virtual('userName').get(function() { 
+    return `${this.firstName} ${this.lastName}`; 
+}); 
+
 const User = model('User', userSchema); 
 
 module.exports = User; 

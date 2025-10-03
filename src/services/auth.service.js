@@ -58,7 +58,7 @@ module.exports = {
 
 function generateAuthToken(user) { 
     const payload = {
-        username: user.username, 
+        userName: user.userName, 
         email: user.email, 
         photo: user.photo  
     }; 
