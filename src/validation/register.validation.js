@@ -1,5 +1,5 @@
 const validator = require('express-validator'); 
-const { ERROR_MESSAGES } = require('../constants/error.messages'); 
+const ERROR_MESSAGES = require('../constants/error.messages'); 
 const { PASSWORD } = require('../constants/validation.values');
 
 const runValidations = () => { 

@@ -1,3 +1,4 @@
+const ERROR_MESSAGES = require('../constants/error.messages');
 const { JWT } = require('../constants/security');
 const ValidationError = require('../errors/ValidationError');
 const User = require('../models/User'); 
@@ -40,13 +41,13 @@ module.exports = {
         // Error if there is no user with provided email 
         const user = await User.findOne({ email: email }); 
         if (!user) { 
-            throw new ValidationError('email', 'User does not exist'); 
+            throw new ValidationError('email', ERROR_MESSAGES.LOGIN.NO_USER_WITH_EMAIL); 
         } 
 
         // Error if password do not match user password s
         const isPasswordValid = await bcrypt.compare(password, user.password); 
         if (false === isPasswordValid) { 
-            throw new ValidationError('password', 'Password incorrect'); 
+            throw new ValidationError('password', ERROR_MESSAGES.LOGIN.PASSWORD_NOT_CORRECT); 
         } 
 
         const authToken = generateAuthToken(user); 
