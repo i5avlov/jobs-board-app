@@ -58,6 +58,10 @@
     <div class="form-group">
         <label for="repeatPassword" class="form-label">Repeat Password</label> 
         <input name="repeatPassword" id="repeatPassword" type="text" class="form-control" /> 
+
+        {{#if errors.passwords}}
+        <span class="text-danger small">{{errors.passwords.message}}</span> 
+        {{/if}} 
     </div> 
 
     <button class="btn btn-outline-success mt-4">Register</button> 
