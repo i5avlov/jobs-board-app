@@ -44,7 +44,7 @@ module.exports = {
             throw new ValidationError('email', ERROR_MESSAGES.LOGIN.NO_USER_WITH_EMAIL); 
         } 
 
-        // Error if password do not match user password s
+        // Error if password do not match user password 
         const isPasswordValid = await bcrypt.compare(password, user.password); 
         if (false === isPasswordValid) { 
             throw new ValidationError('password', ERROR_MESSAGES.LOGIN.PASSWORD_NOT_CORRECT); 
@@ -58,7 +58,8 @@ module.exports = {
 }; 
 
 function generateAuthToken(user) { 
-    const payload = {
+    const payload = { 
+        id: user._id, 
         userName: user.userName, 
         email: user.email, 
         photo: user.photo  
