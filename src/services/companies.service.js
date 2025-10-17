@@ -2,12 +2,12 @@ const Company = require('../models/Company');
 
 module.exports = {
     add: (companyData, userId) => { 
-        const { name, description, image } = companyData; 
+        const { name, description, imageUrl } = companyData; 
 
         return Company.create({
             name: name, 
             description: description, 
-            image: image, 
+            imageUrl: imageUrl, 
             createdBy: userId 
         }); 
 
