@@ -4,6 +4,8 @@ const companySchema = new Schema({
     name: String, 
     description: String, 
     image: String, 
+    addedAt: Date, 
+    modifiedAt: Date, 
     addedBy: {
         type: Types.ObjectId, 
         ref: 'User' 
