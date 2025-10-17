@@ -1,13 +1,13 @@
-const { Schema, model, Types } = require('mongoose'); 
+const { Schema, model, Types, deleteModel } = require('mongoose'); 
 
 const companySchema = new Schema({ 
     name: String, 
     description: String, 
     image: String, 
-    createdBy: {
+    addedBy: {
         type: Types.ObjectId, 
         ref: 'User' 
-    }
+    }, 
 }); 
 
 const Company = model('Company', companySchema); 
