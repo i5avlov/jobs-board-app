@@ -1,6 +1,8 @@
 const companiesController = require('express').Router(); 
 const guards = require('../middlewares/guards.middleware'); 
 const companiesService = require('../services/companies.service');
+const leadsService = require('../services/leads.service');
+const representativesService = require('../services/representatives.service');
 const errorUtils = require('../utils/error.utils');
 
 companiesController
@@ -12,7 +14,12 @@ companiesController
         const companyData = req.body; 
 
         try { 
+            // Creates company 
             const company = await companiesService.add(companyData, userId); 
+            // Sets user as company representative and lead representative 
+            const representative = await representativesService.add(userId, company.id); 
+            const lead = await leadsService.add(representative.id); 
+
             res.redirect(`/companies/${company.id}/details`); 
         } catch (err) { 
             res.render('companies/add', { companyData, errors: errorUtils.normalize(err) }); 
