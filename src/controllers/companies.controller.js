@@ -17,7 +17,7 @@ companiesController
             // Creates company 
             const company = await companiesService.add(companyData, userId); 
             // Sets user as company representative and lead representative 
-            const representative = await representativesService.add(userId, company.id); 
+            const representative = await representativesService.create(userId, company.id); 
             const lead = await leadsService.add(representative.id); 
 
             res.redirect(`/companies/${company.id}/details`); 

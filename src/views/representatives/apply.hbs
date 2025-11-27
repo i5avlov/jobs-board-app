@@ -1,0 +1,14 @@
+<h2>Join Company</h2> 
+
+<div>
+{{#each companies}} 
+<article>
+    <p>{{name}}</p> 
+    <form method="POST"> 
+        <input type="hidden" name="company_id" value="{{_id}}"> 
+
+        <button class="btn btn-outline-success">Join</button> 
+    </form>
+</article> 
+{{/each}} 
+</div> 

@@ -1,6 +1,10 @@
 const Company = require('../models/Company'); 
 
-module.exports = {
+module.exports = { 
+    getAll: () => {
+        return Company.find({}); 
+    }, 
+
     add: (companyData, userId) => { 
         const { name, description, imageUrl } = companyData; 
 

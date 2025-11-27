@@ -8,7 +8,8 @@ const companyRepresentativeSchema = new Schema({
     company: {
         type: Types.ObjectId, 
         ref: 'Company'
-    }
+    }, 
+    isActive: Boolean 
     
 }); 
 
