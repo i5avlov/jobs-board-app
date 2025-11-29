@@ -1,0 +1,82 @@
+<div class="representatives"> 
+    <h3 class="h4 mb-2">Team</h3>    
+
+    <div class="d-flex gap-4">
+        {{#each representatives.active}} 
+        <article class="mb-4 representative-application"> 
+            <p class="mb-0 user">{{user.firstName}} {{user.lastName}}</p> 
+            <p>{{user.email}}</p> 
+
+            <form action="/leads/deactivate" method="POST"> 
+                <input type="hidden" name="user-id" value="{{user._id}}"> 
+                <button class="btn btn-outline-success">Deactivate</button> 
+            </form>
+        </article> 
+        {{/each}} 
+    </div>
+</div> 
+
+<div class="representative-applications"> 
+    <h3 class="h4 mb-2">Representative Applications</h3> 
+
+    {{#each representativeApplications.pending}}
+    <article class="mb-4 representative-application"> 
+        <p class="mb-0 user">{{user.firstName}} {{user.lastName}}</p> 
+        <p>{{user.email}}</p> 
+
+        <div class="d-flex gap-2 application-actions">
+            <form action="/leads/accept" method="POST"> 
+                <input type="hidden" name="user-id" value="{{user._id}}"> 
+                <button class="btn btn-outline-success">Accept</button> 
+            </form> 
+
+            <form action="/representatives/reject" method="POST"> 
+                <input type="hidden" name="user-id" value="{{user._id}}"> 
+                <button class="btn btn-outline-success">Reject</button> 
+            </form>
+        </div>
+    </article> 
+    {{else}} 
+    <p>No applications.</p>
+    {{/each}}
+</div> 
+
+<div class="rejected-representatives"> 
+    <h3 class="h4 mb-2">Rejected Applications</h3> 
+
+    <div class="d-flex gap-2">
+        {{#each representativeApplications.rejected}}
+        <article class="mb-4 representative-application"> 
+            <p class="mb-0 user">{{user.firstName}} {{user.lastName}}</p> 
+            <p>{{user.email}}</p> 
+            
+            <form action="/leads/accept" method="POST"> 
+                <input type="hidden" name="user-id" value="{{user._id}}"> 
+                <button class="btn btn-outline-success">Accept</button> 
+            </form>
+        </article> 
+        {{else}} 
+        <p>No rejected candidates.</p>
+        {{/each}} 
+    </div>
+</div> 
+
+<div class="removed-representatives"> 
+    <h3 class="h4 mb-2">Deactivated Representatives</h3> 
+
+    <div class="d-flex gap-2">
+        {{#each representatives.deactivated}}
+        <article class="mb-4 representative-application"> 
+            <p class="mb-0 user">{{user.firstName}} {{user.lastName}}</p> 
+            <p>{{user.email}}</p> 
+
+            <form action="/leads/reactivate" method="POST"> 
+                <input type="hidden" name="user-id" value="{{user._id}}"> 
+                <button class="btn btn-outline-success">Reactivate</button> 
+            </form>
+        </article> 
+        {{else}} 
+        <p>No deactivated representatives.</p> 
+        {{/each}} 
+    </div>
+</div> 
