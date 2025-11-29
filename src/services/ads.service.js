@@ -25,5 +25,13 @@ module.exports = {
             .findById(adId)
             .select('_id title description')
             .lean(); 
+    }, 
+
+    getAdsByRepresentativeId: (representativeId) => { 
+        return Ad
+            .find({ createdBy: representativeId })
+            .select('_id title description')
+            .lean(); 
+
     }
 }; 

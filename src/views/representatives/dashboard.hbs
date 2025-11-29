@@ -1,5 +1,5 @@
 <div class="representatives"> 
-    <h3 class="h4 mb-2">Representatives</h3>    
+    <h3 class="h4 mb-2">Team</h3>    
 
     <div class="d-flex gap-4">
         {{#each representatives.active}} 
@@ -16,6 +16,22 @@
     </div>
 </div> 
 
+<div class="representative-ads"> 
+    <h3 class="h4 mb-2">Your Ads</h3>    
+
+    <div class="d-flex gap-4">
+        {{#each representativeAds}} 
+        <div class="ad-entry">
+            <h4 class="h5">{{title}}</h4> 
+            <p class="">{{description}}</p> 
+
+            <a href="/ads/{{_id}}/details" class="btn btn-outline-success">Details</a> 
+        </div> 
+        {{/each}}
+    </div>
+</div>
+
+{{!-- 
 <div class="representative-applications"> 
     <h3 class="h4 mb-2">Representative Applications</h3> 
 
@@ -79,4 +95,4 @@
         <p>No deactivated representatives.</p> 
         {{/each}} 
     </div>
-</div> 
+</div>  --}}

@@ -1,4 +1,5 @@
 const representativesController = require('express').Router(); 
+const adsService = require('../services/ads.service');
 const companiesService = require('../services/companies.service'); 
 const representativesService = require('../services/representatives.service');
 
@@ -26,22 +27,23 @@ representativesController
         const companyId = await representativesService.getCompanyIdByRepresentativeId(representativeId); 
         const isLead = await representativesService.isLead(representativeId); 
 
+        // Team members 
+        const representatives = await representativesService
+            .getRepresentativesByCompanyId(companyId); 
+
         let representativeApplications = {}; 
-        let representatives = {}; 
 
         // Lead UI additions 
         if (isLead) { 
             representativeApplications = await representativesService
                 .getRepresentativeApplicationsByCompanyId(companyId); 
-
-            representatives = await representativesService
-                .getRepresentativesByCompanyId(companyId); 
         } 
 
         // Representative UI 
+        const representativeAds = await adsService.getAdsByRepresentativeId(representativeId); 
 
         res.render('representatives/dashboard', { 
-            representativeApplications, representatives 
+            representativeApplications, representatives, representativeAds 
         }); 
     }); 
 

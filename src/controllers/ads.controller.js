@@ -28,7 +28,7 @@ adsController
     }); 
 
 adsController 
-    .get('/details/:adId', async (req, res) => { 
+    .get('/:adId/details', async (req, res) => { 
         const adId = req.params.adId; 
         const adData = await adsService.details(adId); 
 
