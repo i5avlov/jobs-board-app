@@ -4,8 +4,9 @@ const representativesService = require('../services/representatives.service');
 const errorUtils = require('../utils/error.utils'); 
 
 adsController
-    .get('/', (req, res) => {
-        res.render('index'); 
+    .get('/', async (req, res) => { 
+        const adsData = await adsService.getAll(); 
+        res.render('ads/index', { adsData }); 
     }); 
 
 adsController 

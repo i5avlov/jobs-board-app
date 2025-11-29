@@ -2,7 +2,9 @@ const Ad = require('../models/Ad');
 
 module.exports = { 
     getAll: () => {
-        return Ad.find({}); 
+        return Ad
+            .find({})
+            .lean(); 
     }, 
 
     create: (adData, representativeId) => { 
