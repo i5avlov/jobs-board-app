@@ -31,19 +31,11 @@ representativesController
         const representatives = await representativesService
             .getRepresentativesByCompanyId(companyId); 
 
-        let representativeApplications = {}; 
-
-        // Lead UI additions 
-        if (isLead) { 
-            representativeApplications = await representativesService
-                .getRepresentativeApplicationsByCompanyId(companyId); 
-        } 
-
         // Representative UI 
         const representativeAds = await adsService.getAdsByRepresentativeId(representativeId); 
 
         res.render('representatives/dashboard', { 
-            representatives, isLead 
+            representatives, representativeAds, isLead 
         }); 
     }); 
 
