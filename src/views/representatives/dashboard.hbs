@@ -1,22 +1,4 @@
-<div class="representatives"> 
-    <h3 class="h4 mb-2">Team</h3>    
-
-    <div class="d-flex gap-4">
-        {{#each representatives.active}} 
-        <article class="mb-4 representative-application"> 
-            <p class="mb-0 user">{{user.firstName}} {{user.lastName}}</p> 
-            <p>{{user.email}}</p> 
-
-            <form action="/representatives/deactivate" method="POST"> 
-                <input type="hidden" name="user-id" value="{{user._id}}"> 
-                <button class="btn btn-outline-success">Deactivate</button> 
-            </form>
-        </article> 
-        {{/each}} 
-    </div>
-</div> 
-
-<div class="representative-ads"> 
+<div class="mb-4 representative-ads"> 
     <h3 class="h4 mb-2">Your Ads</h3>    
 
     <div class="d-flex gap-4">
@@ -29,4 +11,23 @@
         </div> 
         {{/each}}
     </div>
-</div>
+</div> 
+
+<div class="representatives"> 
+    <h3 class="h4 mb-2">Team</h3>    
+
+    <div class="d-flex gap-4">
+        {{#each representatives.active}} 
+        <article class="representative-application"> 
+            <p class="mb-0 user">{{user.firstName}} {{user.lastName}}</p> 
+            <p>{{user.email}}</p> 
+
+            <form action="/representatives/deactivate" method="POST"> 
+                <input type="hidden" name="user-id" value="{{user._id}}"> 
+                <button class="btn btn-outline-success">Deactivate</button> 
+            </form>
+        </article> 
+        {{/each}} 
+    </div>
+</div> 
+
