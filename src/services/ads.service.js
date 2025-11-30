@@ -1,4 +1,5 @@
 const Ad = require('../models/Ad'); 
+const AdApplication = require('../models/AdApplication');
 
 module.exports = { 
     getAll: () => {
@@ -25,6 +26,14 @@ module.exports = {
             .findById(adId)
             .select('_id title description')
             .lean(); 
+    }, 
+
+    apply: (adId, userId) => { 
+        return AdApplication.create({
+            ad: adId, 
+            user: userId, 
+            addedAt: Date.now(), 
+        }); 
     }, 
 
     getAdsByRepresentativeId: (representativeId) => { 

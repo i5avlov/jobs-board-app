@@ -35,5 +35,15 @@ adsController
         res.render('ads/details', { adData }); 
     }); 
 
+adsController 
+    .get('/:adId/users/:userId/apply', async (req, res) => { 
+        const adId = req.params.adId; 
+        const userId = req.params.userId; 
+        
+        await adsService.apply(adId, userId); 
+
+        res.redirect('/ads'); 
+    }); 
+
 
 module.exports = adsController; 
