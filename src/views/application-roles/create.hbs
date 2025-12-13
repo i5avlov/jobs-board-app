@@ -1,0 +1,25 @@
+<h2>Create Application Role</h2> 
+
+<form class="form form-company-add" method="POST"> 
+    <div class="form-group">
+        <label for="application-role-name" class="form-label">Name</label> 
+        <input name="application-role-name" id="application-role-name" type="text" class="form-control" value="{{applicationRoleData.name}}" /> 
+
+        {{#if errors.name}}
+        <span class="text-danger small">{{errors.name.message}}</span> 
+        {{/if}}
+    </div> 
+
+    <div class="form-group">
+        <label for="description" class="form-label">Description</label> 
+        <textarea rows="2" name="description" id="description" type="text" class="form-control">{{applicationRoleData.description}}</textarea> 
+
+        {{#if errors.description}}
+        <span class="text-danger small">{{errors.description.message}}</span> 
+        {{/if}}
+    </div> 
+
+    <div class="buttons mt-4"> 
+        <button class="btn btn-outline-success">Create Application Role</button> 
+    </div>
+</form> 
