@@ -3,7 +3,7 @@
 <form class="form form-company-add" method="POST"> 
     <div class="form-group">
         <label for="application-role-name" class="form-label">Name</label> 
-        <input name="application-role-name" id="application-role-name" type="text" class="form-control" value="{{applicationRoleData.name}}" /> 
+        <input name="name" id="application-role-name" type="text" class="form-control" value="{{applicationRoleData.name}}" /> 
 
         {{#if errors.name}}
         <span class="text-danger small">{{errors.name.message}}</span> 

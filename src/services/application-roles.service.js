@@ -8,8 +8,7 @@ module.exports = {
     }, 
 
     create: (applicationRoleData) => { 
-        const name = applicationRoleData['application-role-name']; 
-        const description = applicationRoleData.description; 
+        const { name, description } = applicationRoleData; 
 
         return ApplicationRole
             .create({
