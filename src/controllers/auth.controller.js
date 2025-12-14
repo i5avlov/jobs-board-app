@@ -4,6 +4,7 @@ const errorUtils = require('../utils/error.utils');
 const registerValidation = require('../validation/register.validation'); 
 const loginValidation = require('../validation/login.validation'); 
 const { JWT } = require('../constants/security'); 
+const jwt = require('jsonwebtoken'); 
 
 authController
     .get('/register', (req, res) => {

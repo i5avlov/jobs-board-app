@@ -3,7 +3,6 @@ const { JWT } = require('../constants/security');
 const ValidationError = require('../errors/ValidationError');
 const User = require('../models/User'); 
 const bcrypt = require('bcrypt'); 
-const jwt = require('jsonwebtoken'); 
 
 module.exports = {
     register: async (registerData) => { 
