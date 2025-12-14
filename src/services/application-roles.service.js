@@ -18,5 +18,16 @@ module.exports = {
             }); 
     }, 
 
+    getApplicationRoleIdByName: async (applicationRoleName) => { 
+        const applicationRole = await ApplicationRole.findOne({ name: applicationRoleName }); 
+
+        // Role not found 
+        if (applicationRole === null) { 
+            throw new Error('Application role does not exist.'); 
+        } 
+
+        return applicationRole._id; 
+    }
+
 
 }; 
