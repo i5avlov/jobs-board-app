@@ -7,6 +7,7 @@ const userRolesService = require('../services/user-roles.service');
 const applicationRolesService = require('../services/application-roles.service'); 
 const { JWT } = require('../constants/security'); 
 const jwt = require('jsonwebtoken'); 
+const APPLICATION_ROLES = require('../constants/application-roles.constants');
 
 authController
     .get('/register', (req, res) => {
@@ -27,7 +28,7 @@ authController
             const user = await authService.register(registerData); 
 
             // Assign user the role of user
-            const userRoleId = await applicationRolesService.getApplicationRoleIdByName('User'); 
+            const userRoleId = await applicationRolesService.getApplicationRoleIdByName(APPLICATION_ROLES.USER); 
             await userRolesService.assignUserRole(user._id, userRoleId); 
 
             // Generate auth token 
