@@ -30,9 +30,7 @@ module.exports = {
             password: password 
         });  
 
-        const authToken = generateAuthToken(user); 
-
-        return authToken; 
+        return user; 
     }, 
 
     login: async (loginData) => { 
@@ -50,22 +48,7 @@ module.exports = {
             throw new ValidationError('password', ERROR_MESSAGES.LOGIN.PASSWORD_NOT_CORRECT); 
         } 
 
-        const authToken = generateAuthToken(user); 
-
-        return authToken; 
+        return user; 
     }, 
 
 }; 
-
-function generateAuthToken(user) { 
-    const payload = { 
-        id: user._id, 
-        userName: user.userName, 
-        email: user.email, 
-        photo: user.photo  
-    }; 
-
-    const token = jwt.sign(JSON.stringify(payload), JWT.SECRET); 
-
-    return token; 
-}

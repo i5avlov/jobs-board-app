@@ -3,7 +3,7 @@ const authService = require('../services/auth.service');
 const errorUtils = require('../utils/error.utils'); 
 const registerValidation = require('../validation/register.validation'); 
 const loginValidation = require('../validation/login.validation'); 
-const { JWT } = require('../constants/security');
+const { JWT } = require('../constants/security'); 
 
 authController
     .get('/register', (req, res) => {
@@ -20,8 +20,11 @@ authController
                 throw validationErrors; 
             } 
 
-            // Generate token if register is successful 
-            const authToken = await authService.register(registerData); 
+            // Register user and get user data if register is successful
+            const user = await authService.register(registerData); 
+
+            // Generate auth token 
+            const authToken = generateAuthToken(user); 
             // Set token in cookie 
             res.cookie(JWT.COOKIE_NAME, authToken); 
 
@@ -47,8 +50,11 @@ authController
                 throw validationErrors; 
             } 
 
-            // Generate token if login is successful 
-            const authToken = await authService.login(loginData); 
+            // Log user in and get user data if login is successful 
+            const user = await authService.login(loginData); 
+            
+            // Generate auth token 
+            const authToken = generateAuthToken(user); 
             // Set token in cookie  
             res.cookie(JWT.COOKIE_NAME, authToken); 
             
@@ -66,3 +72,17 @@ authController
     }); 
 
 module.exports = authController; 
+
+function generateAuthToken(user) { 
+    const payload = { 
+        id: user._id, 
+        userName: user.userName, 
+        email: user.email, 
+        photo: user.photo  
+    }; 
+
+    const token = jwt.sign(JSON.stringify(payload), JWT.SECRET); 
+
+    return token; 
+} 
+
