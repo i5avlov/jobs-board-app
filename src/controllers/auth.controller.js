@@ -3,6 +3,8 @@ const authService = require('../services/auth.service');
 const errorUtils = require('../utils/error.utils'); 
 const registerValidation = require('../validation/register.validation'); 
 const loginValidation = require('../validation/login.validation'); 
+const userRolesService = require('../services/user-roles.service');
+const applicationRolesService = require('../services/application-roles.service'); 
 const { JWT } = require('../constants/security'); 
 const jwt = require('jsonwebtoken'); 
 
@@ -23,6 +25,10 @@ authController
 
             // Register user and get user data if register is successful
             const user = await authService.register(registerData); 
+
+            // Assign user the role of user
+            const userRoleId = await applicationRolesService.getApplicationRoleIdByName('User'); 
+            await userRolesService.assignUserRole(user._id, userRoleId); 
 
             // Generate auth token 
             const authToken = generateAuthToken(user); 
