@@ -5,9 +5,9 @@ const registerValidation = require('../validation/register.validation');
 const loginValidation = require('../validation/login.validation'); 
 const userRolesService = require('../services/user-roles.service');
 const applicationRolesService = require('../services/application-roles.service'); 
-const { JWT } = require('../constants/security'); 
-const jwt = require('jsonwebtoken'); 
-const APPLICATION_ROLES = require('../constants/application-roles.constants');
+const APPLICATION_ROLES = require('../constants/application-roles.constants'); 
+const userUtils = require('../utils/user.utils'); 
+const { JWT } = require('../constants/security');
 
 authController
     .get('/register', (req, res) => {
@@ -32,7 +32,7 @@ authController
             await userRolesService.assignUserRole(user._id, userRoleId); 
 
             // Generate auth token 
-            const authToken = generateAuthToken(user); 
+            const authToken = userUtils.generateAuthToken(user); 
             // Set token in cookie 
             res.cookie(JWT.COOKIE_NAME, authToken); 
 
@@ -62,7 +62,7 @@ authController
             const user = await authService.login(loginData); 
             
             // Generate auth token 
-            const authToken = generateAuthToken(user); 
+            const authToken = userUtils.generateAuthToken(user); 
             // Set token in cookie  
             res.cookie(JWT.COOKIE_NAME, authToken); 
             
@@ -80,17 +80,3 @@ authController
     }); 
 
 module.exports = authController; 
-
-function generateAuthToken(user) { 
-    const payload = { 
-        id: user._id, 
-        userName: user.userName, 
-        email: user.email, 
-        photo: user.photo  
-    }; 
-
-    const token = jwt.sign(JSON.stringify(payload), JWT.SECRET); 
-
-    return token; 
-} 
-
