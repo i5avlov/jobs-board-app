@@ -18,6 +18,24 @@ module.exports = {
             }); 
     }, 
 
+    update: (applicationRoleId, updateData) => { 
+        const { name, description } = updateData; 
+
+        return ApplicationRole
+            .findByIdAndUpdate(applicationRoleId, {
+                name: name, 
+                description: description 
+            }); 
+
+    }, 
+
+    getUpdate: (applicationRoleId) => { 
+        return ApplicationRole
+            .findById(applicationRoleId)
+            .select({ name: true, description: true })
+            .lean(); 
+    }, 
+
     getApplicationRoleIdByName: async (applicationRoleName) => { 
         const applicationRole = await ApplicationRole.findOne({ name: applicationRoleName }); 
 
