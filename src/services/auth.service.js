@@ -1,5 +1,4 @@
 const ERROR_MESSAGES = require('../constants/error.messages');
-const { JWT } = require('../constants/security');
 const ValidationError = require('../errors/ValidationError');
 const User = require('../models/User'); 
 const bcrypt = require('bcrypt'); 
