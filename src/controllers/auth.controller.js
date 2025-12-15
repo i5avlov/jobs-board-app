@@ -3,11 +3,10 @@ const authService = require('../services/auth.service');
 const errorUtils = require('../utils/error.utils'); 
 const registerValidation = require('../validation/register.validation'); 
 const loginValidation = require('../validation/login.validation'); 
-const userRolesService = require('../services/user-roles.service');
-const applicationRolesService = require('../services/application-roles.service'); 
 const APPLICATION_ROLES = require('../constants/application-roles.constants'); 
 const userUtils = require('../utils/user.utils'); 
-const { JWT } = require('../constants/security');
+const { JWT } = require('../constants/security'); 
+const applicationRolesUtils = require('../utils/application-roles.utils'); 
 
 authController
     .get('/register', (req, res) => {
@@ -28,8 +27,7 @@ authController
             const user = await authService.register(registerData); 
 
             // Assign user the role of user
-            const userRoleId = await applicationRolesService.getApplicationRoleIdByName(APPLICATION_ROLES.USER); 
-            await userRolesService.assignUserRole(user._id, userRoleId); 
+            applicationRolesUtils.putUserInRole(user._id, APPLICATION_ROLES.USER); 
 
             // Generate auth token 
             const authToken = userUtils.generateAuthToken(user); 
