@@ -1,6 +1,8 @@
 const leadsController = require('express').Router(); 
+const APPLICATION_ROLES = require('../constants/application-roles.constants');
 const leadsService = require('../services/leads.service');
 const representativesService = require('../services/representatives.service'); 
+const applicationRolesUtils = require('../utils/application-roles.utils'); 
 
 leadsController
     .get('/dashboard', async (req, res) => { 
@@ -31,9 +33,12 @@ leadsController
         const userId = req.body['user-id']; 
 
         // Marking representative application as accepted 
-        await representativesService.accept(userId, companyId); 
+        await leadsService.accept(userId, companyId); 
         // Adding user as a company representative 
-        await leadsService.create(userId, companyId); 
+        await representativesService.create(userId, companyId); 
+
+        // Assigning the user role of company representative 
+        await applicationRolesUtils.putUserInRole(userId, APPLICATION_ROLES.COMPANY_REPRESENTATIVE); 
 
         res.redirect('/leads/dashboard'); 
 
