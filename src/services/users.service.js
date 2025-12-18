@@ -1,6 +1,20 @@
 const User = require('../models/User'); 
 
-module.exports = {
+module.exports = { 
+    // ['name', 'email', 'age'...] 
+    getAll: (projectionKeysArray) => { 
+        const projectionObject = projectionKeysArray
+            .reduce((obj, currentKey) => { 
+                obj[currentKey] = true; 
+                return obj; 
+            }, {}); 
+
+        return User 
+            .find({}) 
+            .select(projectionObject) 
+            .lean(); 
+    }, 
+
     getProfileByEmail: (email) => { 
         return User.findOne({ email: email }); 
 
