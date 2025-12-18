@@ -1,9 +1,11 @@
 const companiesController = require('express').Router(); 
+const APPLICATION_ROLES = require('../constants/application-roles.constants');
 const guards = require('../middlewares/guards.middleware'); 
 const companiesService = require('../services/companies.service');
 const leadsService = require('../services/leads.service');
 const representativesService = require('../services/representatives.service');
-const errorUtils = require('../utils/error.utils');
+const errorUtils = require('../utils/error.utils'); 
+const applicationRolesUtils = require('../utils/application-roles.utils'); 
 
 companiesController
     .get('/add', guards.isAuth(), async (req, res) => { 
@@ -19,6 +21,10 @@ companiesController
             // Sets user as company representative and lead representative 
             const representative = await representativesService.create(userId, company.id); 
             const lead = await leadsService.add(representative.id); 
+
+            // Assigns user the roles of company representative and lead 
+            applicationRolesUtils.putUserInRole(userId, APPLICATION_ROLES.COMPANY_REPRESENTATIVE); 
+            applicationRolesUtils.putUserInRole(userId, APPLICATION_ROLES.LEAD_REPRESENTATIVE); 
 
             res.redirect(`/companies/${company.id}/details`); 
         } catch (err) { 
