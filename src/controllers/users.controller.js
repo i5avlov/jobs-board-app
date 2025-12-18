@@ -1,9 +1,9 @@
+const usersController = require('express').Router(); 
 const authService = require('../services/auth.service'); 
 const usersService = require('../services/users.service'); 
 const guards = require('../middlewares/guards.middleware'); 
-const errorUtils = require('../utils/error.utils');
-
-const usersController = require('express').Router(); 
+const errorUtils = require('../utils/error.utils'); 
+const userRolesService = require('../services/user-roles.service');
 
 usersController
     .get('/profile', guards.isAuth(), async (req, res) => { 
@@ -33,6 +33,12 @@ usersController
         
     }); 
 
+usersController 
+    .get('/', async (req, res) => { 
+       const usersRoles = await userRolesService.getAll(); 
+
+       res.render('users/index', { usersRoles }); 
+    }); 
 
 
 module.exports = usersController; 

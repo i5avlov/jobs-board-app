@@ -1,0 +1,40 @@
+<style> 
+    .roles { 
+        display: flex; align-items: center; 
+
+    } 
+
+    span {
+        position: relative; 
+    } 
+
+    span + span {
+        margin-left: 0.5rem; padding-left: 0.5rem; 
+    }
+
+    span + span::before { 
+        position: absolute; left: 0; 
+        display: inline-block; 
+        box-sizing: border-box; 
+        height: 100%; padding-block: 0.2em; 
+        width: 1px; 
+        background-color: currentColor; 
+        content: ""; 
+    } 
+
+    .roles + .user {
+        margin-top: 1rem; 
+    } 
+</style>
+
+<h2 class="mb-3">Users</h2> 
+
+{{#each usersRoles}} 
+<p class="mb-0 user">{{user.firstName}} {{user.lastName}}</p> 
+
+<div class="roles"> 
+    {{#each roles}}
+    <span>{{name}}</span> 
+    {{/each}} 
+</div>
+{{/each}}
