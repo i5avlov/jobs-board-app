@@ -22,4 +22,17 @@ module.exports = {
         ); 
     }, 
 
+    getUserRoles: async (userId) => { 
+        // Getting user roles record by user id 
+        const userRoles = await UserRole
+            .findOne({ user: userId })
+            .populate('roles', { name: true }); 
+
+        // Getting roles names list for the user 
+        const roles = userRoles.roles
+            .map(ur => ur.name); 
+
+        return roles; 
+    }, 
+
 }; 

@@ -26,11 +26,11 @@ authController
             // Register user and get user data if register is successful
             const user = await authService.register(registerData); 
 
-            // Assign user the role of user
-            applicationRolesUtils.putUserInRole(user._id, APPLICATION_ROLES.USER); 
+            // Assign the role of user
+            await applicationRolesUtils.putUserInRole(user._id, APPLICATION_ROLES.USER); 
 
             // Generate auth token 
-            const authToken = userUtils.generateAuthToken(user); 
+            const authToken = await userUtils.generateAuthToken(user); 
             // Set token in cookie 
             res.cookie(JWT.COOKIE_NAME, authToken); 
 
@@ -60,7 +60,7 @@ authController
             const user = await authService.login(loginData); 
             
             // Generate auth token 
-            const authToken = userUtils.generateAuthToken(user); 
+            const authToken = await userUtils.generateAuthToken(user); 
             // Set token in cookie  
             res.cookie(JWT.COOKIE_NAME, authToken); 
             
